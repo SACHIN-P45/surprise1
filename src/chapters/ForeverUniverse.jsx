@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Sparkles,
@@ -14,10 +14,14 @@ import { foreverUniverse } from '../data/loveWorldData';
 import FloatingPetals from '../components/FloatingPetals';
 
 /**
- * Chapter 10 — Our Forever Universe (Fully Mobile-Responsive Masterpiece Edition)
+ * Chapter 10 — Our Forever Universe (Highly Mobile-Responsive Masterpiece Edition)
  *
- * An interactive, cinematic celestial observatory engineered to adapt seamlessly
- * from narrow mobile viewports (320px) up to ultra-wide 4K displays.
+ * Dynamically re-engineers astronomical coordinates and star scales for mobile vs desktop:
+ * - Dynamic isMobile state with adaptive heart constellation geometry (zero node/star overlap)
+ * - Fluid clamp sizing for twin celestial stars, auras, astrolabe rings, and center wax seal
+ * - Mobile 1-tap star resonance switchers (⭐ Sachin • ✨ Twin Harmony • 💖 Samithra)
+ * - Safe mobile touch targets (min 44px)
+ * - Responsive 1-col to 2-col vow cards & fluid typography
  */
 
 export default function ForeverUniverse() {
@@ -26,6 +30,16 @@ export default function ForeverUniverse() {
   const [illuminatedNodes, setIlluminatedNodes] = useState(new Set([1, 2, 3, 4, 5])); // Pre-connected for magnificent first sight
   const [cosmicPulse, setCosmicPulse] = useState(false);
   const [floatingParticles, setFloatingParticles] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const cosmicNodes = [
     {
@@ -33,8 +47,6 @@ export default function ForeverUniverse() {
       title: 'The First Spark',
       subtitle: 'Where destiny ignited our sky',
       text: 'When your world crossed into mine, every quiet corner of life suddenly became radiant, warm, and deeply meaningful.',
-      x: 18,
-      y: 32,
       roman: 'I',
       icon: '✨',
       color: '#FF83B8',
@@ -45,8 +57,6 @@ export default function ForeverUniverse() {
       title: 'Infinite Laughter',
       subtitle: 'The sweetest music in the cosmos',
       text: 'The effortless smiles that happen only when we talk — precious moments where time completely forgets to tick.',
-      x: 36,
-      y: 18,
       roman: 'II',
       icon: '🌸',
       color: '#FFE0A0',
@@ -57,8 +67,6 @@ export default function ForeverUniverse() {
       title: 'Unspoken Comfort',
       subtitle: 'Where silence feels like home',
       text: 'Where silence feels safe, conversations feel like coming home, and warmth is unconditionally guaranteed forever.',
-      x: 64,
-      y: 18,
       roman: 'III',
       icon: '🌙',
       color: '#CDBBFF',
@@ -69,8 +77,6 @@ export default function ForeverUniverse() {
       title: 'Twin Destinies',
       subtitle: 'Gravitational soul alignment',
       text: 'Two separate journeys across a vast universe that were destined by the stars to orbit one another across every tomorrow.',
-      x: 82,
-      y: 32,
       roman: 'IV',
       icon: '💫',
       color: '#B8E6FF',
@@ -81,14 +87,51 @@ export default function ForeverUniverse() {
       title: 'Forever Tomorrow',
       subtitle: 'The eternal choice of my heart',
       text: 'Every sunrise, every storm, and every quiet sunset from now until the end of time — chosen with full certainty and endless devotion.',
-      x: 50,
-      y: 78,
       roman: 'V',
       icon: '👑',
       color: '#FFD6E7',
       particles: ['👑', '💖', '✨', '♾️'],
     },
   ];
+
+  // Dynamic Adaptive Coordinates (Prevents ANY overlap on narrow mobile viewports)
+  const getNodeCoords = (nodeId) => {
+    if (isMobile) {
+      switch (nodeId) {
+        case 1: return { x: 12, y: 19 }; // Top-left outer cusp
+        case 2: return { x: 33, y: 10 }; // Top-left heart peak
+        case 3: return { x: 67, y: 10 }; // Top-right heart peak
+        case 4: return { x: 88, y: 19 }; // Top-right outer cusp
+        case 5: return { x: 50, y: 86 }; // Bottom apex
+        default: return { x: 50, y: 50 };
+      }
+    } else {
+      switch (nodeId) {
+        case 1: return { x: 18, y: 32 };
+        case 2: return { x: 36, y: 18 };
+        case 3: return { x: 64, y: 18 };
+        case 4: return { x: 82, y: 32 };
+        case 5: return { x: 50, y: 78 };
+        default: return { x: 50, y: 50 };
+      }
+    }
+  };
+
+  const starPositions = isMobile
+    ? {
+        sachin: { x: 23, y: 48 },
+        samithra: { x: 77, y: 48 },
+        center: { x: 50, y: 48 },
+      }
+    : {
+        sachin: { x: 22, y: 50 },
+        samithra: { x: 78, y: 50 },
+        center: { x: 50, y: 50 },
+      };
+
+  const heartPathD = isMobile
+    ? 'M 50 86 Q 10 60 12 19 Q 20 8 33 10 Q 43 14 50 22 Q 57 14 67 10 Q 80 8 88 19 Q 90 60 50 86 Z'
+    : 'M 50 78 Q 20 60 18 32 Q 22 14 36 18 Q 45 22 50 30 Q 55 22 64 18 Q 78 14 82 32 Q 80 60 50 78 Z';
 
   // Delicate Celestial Audio Chimes
   const playCelestialTone = (freq = 528) => {
@@ -180,8 +223,11 @@ export default function ForeverUniverse() {
       id="chapter-universe"
       style={{
         minHeight: '100vh',
+        width: '100%',
+        maxWidth: '100vw',
         position: 'relative',
         overflow: 'hidden',
+        boxSizing: 'border-box',
         padding: 'clamp(2.5rem, 5vw, 5rem) clamp(0.75rem, 3.5vw, 1.5rem)',
         display: 'flex',
         flexDirection: 'column',
@@ -309,7 +355,7 @@ export default function ForeverUniverse() {
         className="body-lg"
         style={{
           textAlign: 'center',
-          marginBottom: '1.75rem',
+          marginBottom: '1.5rem',
           maxWidth: '740px',
           color: 'var(--soft-lavender)',
           zIndex: 10,
@@ -324,10 +370,77 @@ export default function ForeverUniverse() {
         viewport={{ once: true }}
       >
         Across infinite galaxies and light-years of space, our two stars found each other. Touch the realistic 3D twin celestial bodies or glowing constellation nodes to weave our sacred heart.
-        <span style={{ display: 'block', fontSize: 'clamp(0.8rem, 2.2vw, 0.92rem)', color: 'var(--champagne-gold)', marginTop: '0.4rem', fontWeight: 500 }}>
-          ✨ Touch Sachin's Sun ⭐ or Samithra's Rose Star 💖 to resonate our eternal gravitational harmony
-        </span>
       </motion.p>
+
+      {/* ─── MOBILE 1-TAP QUICK RESONANCE SWITCHER ─── */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 'clamp(6px, 1.5vw, 10px)',
+          marginBottom: '1rem',
+          zIndex: 10,
+          flexWrap: 'wrap',
+        }}
+      >
+        <button
+          onClick={(e) => triggerStarPulse('sachin', e)}
+          style={{
+            fontSize: 'clamp(0.74rem, 2vw, 0.82rem)',
+            fontWeight: 600,
+            padding: '5px 12px',
+            borderRadius: '20px',
+            background: activeStar === 'sachin' ? 'rgba(255, 224, 160, 0.25)' : 'rgba(24, 12, 46, 0.85)',
+            color: '#FFE0A0',
+            border: '1.2px solid rgba(255, 224, 160, 0.55)',
+            cursor: 'pointer',
+            transition: 'all 0.25s ease',
+            boxShadow: activeStar === 'sachin' ? '0 0 15px rgba(255, 224, 160, 0.5)' : 'none',
+          }}
+        >
+          ⭐ Sachin's Sun
+        </button>
+
+        <button
+          onClick={(e) => {
+            setActiveStar('both');
+            triggerStarPulse('both', e);
+          }}
+          style={{
+            fontSize: 'clamp(0.74rem, 2vw, 0.82rem)',
+            fontWeight: 600,
+            padding: '5px 12px',
+            borderRadius: '20px',
+            background: activeStar === 'both' ? 'linear-gradient(135deg, rgba(255, 224, 160, 0.25), rgba(255, 131, 184, 0.25))' : 'rgba(24, 12, 46, 0.85)',
+            color: '#FFF8F3',
+            border: '1.2px solid rgba(255, 255, 255, 0.45)',
+            cursor: 'pointer',
+            transition: 'all 0.25s ease',
+            boxShadow: activeStar === 'both' ? '0 0 15px rgba(255, 131, 184, 0.5)' : 'none',
+          }}
+        >
+          ✨ Twin Orbit
+        </button>
+
+        <button
+          onClick={(e) => triggerStarPulse('samithra', e)}
+          style={{
+            fontSize: 'clamp(0.74rem, 2vw, 0.82rem)',
+            fontWeight: 600,
+            padding: '5px 12px',
+            borderRadius: '20px',
+            background: activeStar === 'samithra' ? 'rgba(255, 131, 184, 0.25)' : 'rgba(24, 12, 46, 0.85)',
+            color: '#FF83B8',
+            border: '1.2px solid rgba(255, 131, 184, 0.55)',
+            cursor: 'pointer',
+            transition: 'all 0.25s ease',
+            boxShadow: activeStar === 'samithra' ? '0 0 15px rgba(255, 131, 184, 0.5)' : 'none',
+          }}
+        >
+          💖 Samithra's Star
+        </button>
+      </div>
 
       {/* ─── CELESTIAL CONTROL RIBBON (MOBILE RESPONSIVE) ─── */}
       <motion.div
@@ -337,7 +450,7 @@ export default function ForeverUniverse() {
           alignItems: 'center',
           justifyContent: 'center',
           gap: 'clamp(0.6rem, 2vw, 1.25rem)',
-          marginBottom: '2rem',
+          marginBottom: '1.75rem',
           padding: 'clamp(0.55rem, 1.8vw, 0.75rem) clamp(0.85rem, 3vw, 1.6rem)',
           background: 'linear-gradient(135deg, rgba(24, 12, 46, 0.94) 0%, rgba(12, 8, 28, 0.96) 100%)',
           border: '1.5px solid rgba(255, 224, 160, 0.55)',
@@ -435,7 +548,7 @@ export default function ForeverUniverse() {
           maxWidth: '1080px',
           width: '100%',
           position: 'relative',
-          padding: 'clamp(0.85rem, 2.8vw, 2.6rem)',
+          padding: 'clamp(0.75rem, 2.5vw, 2.4rem)',
           borderRadius: 'clamp(18px, 3.5vw, 26px)',
           border: '2px solid rgba(255, 224, 160, 0.55)',
           boxShadow: '0 25px 85px rgba(0,0,0,0.9), 0 0 70px rgba(109,76,194,0.35)',
@@ -443,6 +556,7 @@ export default function ForeverUniverse() {
           zIndex: 10,
           marginBottom: '2.5rem',
           background: 'linear-gradient(165deg, rgba(22, 12, 44, 0.98) 0%, rgba(10, 6, 22, 0.99) 60%, rgba(38, 14, 56, 0.95) 100%)',
+          boxSizing: 'border-box',
         }}
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -453,9 +567,9 @@ export default function ForeverUniverse() {
         <div
           style={{
             position: 'relative',
-            height: 'clamp(400px, 58vh, 540px)',
+            height: isMobile ? 'clamp(440px, 64vh, 520px)' : 'clamp(460px, 60vh, 550px)',
             width: '100%',
-            marginBottom: '1.6rem',
+            marginBottom: '1.5rem',
             borderRadius: 'clamp(14px, 3vw, 20px)',
             backgroundImage: "radial-gradient(circle at center, rgba(16, 8, 36, 0.35) 0%, rgba(8, 4, 18, 0.82) 75%, rgba(4, 2, 10, 0.98) 100%), url('/images/celestial-galaxy-bg.jpg')",
             backgroundSize: 'cover',
@@ -469,11 +583,11 @@ export default function ForeverUniverse() {
           <div
             style={{
               position: 'absolute',
-              top: '50%',
-              left: '50%',
+              top: `${starPositions.center.y}%`,
+              left: `${starPositions.center.x}%`,
               transform: 'translate(-50%, -50%)',
-              width: 'clamp(280px, 45vw, 500px)',
-              height: 'clamp(280px, 45vw, 500px)',
+              width: isMobile ? '280px' : 'clamp(320px, 45vw, 500px)',
+              height: isMobile ? '280px' : 'clamp(320px, 45vw, 500px)',
               borderRadius: '50%',
               border: '1.2px dashed rgba(255, 224, 160, 0.2)',
               pointerEvents: 'none',
@@ -482,11 +596,11 @@ export default function ForeverUniverse() {
           <div
             style={{
               position: 'absolute',
-              top: '50%',
-              left: '50%',
+              top: `${starPositions.center.y}%`,
+              left: `${starPositions.center.x}%`,
               transform: 'translate(-50%, -50%)',
-              width: 'clamp(190px, 30vw, 340px)',
-              height: 'clamp(190px, 30vw, 340px)',
+              width: isMobile ? '180px' : 'clamp(200px, 30vw, 340px)',
+              height: isMobile ? '180px' : 'clamp(200px, 30vw, 340px)',
               borderRadius: '50%',
               border: '1px solid rgba(255, 131, 184, 0.18)',
               pointerEvents: 'none',
@@ -521,9 +635,9 @@ export default function ForeverUniverse() {
               </filter>
             </defs>
 
-            {/* Sacred Cosmic Heart Constellation Path (Traced along nodes 5 -> 1 -> 2 -> notch -> 3 -> 4 -> 5) */}
+            {/* Sacred Cosmic Heart Constellation Path (Traced dynamically) */}
             <motion.path
-              d="M 50 78 Q 20 60 18 32 Q 22 14 36 18 Q 45 22 50 30 Q 55 22 64 18 Q 78 14 82 32 Q 80 60 50 78 Z"
+              d={heartPathD}
               fill={allConnected ? 'rgba(255, 131, 184, 0.08)' : 'none'}
               stroke="url(#heartContourGradRealistic)"
               strokeWidth={allConnected ? '2' : '1.4'}
@@ -537,12 +651,12 @@ export default function ForeverUniverse() {
               transition={{ repeat: Infinity, duration: 4, ease: 'linear' }}
             />
 
-            {/* Pulsing Starlight Gravitational Bridge connecting Sachin (22, 50) & Samithra (78, 50) */}
+            {/* Pulsing Starlight Gravitational Bridge connecting Sachin & Samithra */}
             <motion.line
-              x1="22"
-              y1="50"
-              x2="78"
-              y2="50"
+              x1={starPositions.sachin.x}
+              y1={starPositions.sachin.y}
+              x2={starPositions.samithra.x}
+              y2={starPositions.samithra.y}
               stroke="url(#orbitBridgeGradRealistic)"
               strokeWidth="2.8"
               strokeDasharray="2.5, 2.5"
@@ -554,14 +668,18 @@ export default function ForeverUniverse() {
             {/* Dynamic Radial Connections to illuminated memory nodes */}
             {cosmicNodes.map((node) => {
               const isLit = illuminatedNodes.has(node.id);
+              const coords = getNodeCoords(node.id);
+              const closestStar = coords.x < 50 ? starPositions.sachin : starPositions.samithra;
+              const apexCoords = getNodeCoords(5);
+
               return (
                 <g key={node.id}>
                   {/* Line from closest star */}
                   <line
-                    x1={node.x < 50 ? 22 : 78}
-                    y1={50}
-                    x2={node.x}
-                    y2={node.y}
+                    x1={closestStar.x}
+                    y1={closestStar.y}
+                    x2={coords.x}
+                    y2={coords.y}
                     stroke={isLit ? node.color : 'rgba(205,187,255,0.22)'}
                     strokeWidth={isLit ? '1.5' : '0.7'}
                     strokeDasharray={isLit ? 'none' : '1.5, 1.5'}
@@ -571,10 +689,10 @@ export default function ForeverUniverse() {
                   {/* Convergence line to node 5 (apex of heart) */}
                   {isLit && node.id !== 5 && (
                     <line
-                      x1={node.x}
-                      y1={node.y}
-                      x2={50}
-                      y2={78}
+                      x1={coords.x}
+                      y1={coords.y}
+                      x2={apexCoords.x}
+                      y2={apexCoords.y}
                       stroke="rgba(255, 224, 160, 0.5)"
                       strokeWidth="1.2"
                       strokeDasharray="2, 2"
@@ -585,7 +703,7 @@ export default function ForeverUniverse() {
             })}
           </svg>
 
-          {/* Center Union Medallion with Real Royal Wax Seal at (50%, 50%) */}
+          {/* Center Union Medallion with Real Royal Wax Seal */}
           <motion.div
             animate={{
               scale: cosmicPulse ? [1, 1.3, 1] : [1, 1.08, 1],
@@ -598,12 +716,12 @@ export default function ForeverUniverse() {
             transition={{ repeat: Infinity, duration: 2.8, ease: 'easeInOut' }}
             style={{
               position: 'absolute',
-              left: '50%',
-              top: '50%',
+              left: `${starPositions.center.x}%`,
+              top: `${starPositions.center.y}%`,
               x: '-50%',
               y: '-50%',
-              width: 'clamp(40px, 10vw, 54px)',
-              height: 'clamp(40px, 10vw, 54px)',
+              width: isMobile ? '40px' : 'clamp(44px, 10vw, 54px)',
+              height: isMobile ? '40px' : 'clamp(44px, 10vw, 54px)',
               borderRadius: '50%',
               border: '2px solid #FFE0A0',
               zIndex: 9,
@@ -631,8 +749,8 @@ export default function ForeverUniverse() {
             whileTap={{ scale: 0.94 }}
             style={{
               position: 'absolute',
-              left: '22%',
-              top: '50%',
+              left: `${starPositions.sachin.x}%`,
+              top: `${starPositions.sachin.y}%`,
               x: '-50%',
               y: '-50%',
               cursor: 'pointer',
@@ -648,10 +766,10 @@ export default function ForeverUniverse() {
               transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
               style={{
                 position: 'absolute',
-                width: 'clamp(98px, 25vw, 155px)',
-                height: 'clamp(98px, 25vw, 155px)',
+                width: isMobile ? '94px' : 'clamp(100px, 25vw, 155px)',
+                height: isMobile ? '94px' : 'clamp(100px, 25vw, 155px)',
                 borderRadius: '50%',
-                border: '1.5px dashed rgba(255, 224, 160, 0.7)',
+                border: '1.4px dashed rgba(255, 224, 160, 0.7)',
                 top: '50%',
                 left: '50%',
                 x: '-50%',
@@ -669,11 +787,11 @@ export default function ForeverUniverse() {
               transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
               style={{
                 position: 'absolute',
-                width: 'clamp(82px, 21vw, 132px)',
-                height: 'clamp(82px, 21vw, 132px)',
+                width: isMobile ? '78px' : 'clamp(84px, 21vw, 132px)',
+                height: isMobile ? '78px' : 'clamp(84px, 21vw, 132px)',
                 borderRadius: '50%',
                 background: 'radial-gradient(circle, rgba(255, 210, 80, 0.6) 20%, rgba(255, 140, 20, 0.35) 55%, transparent 75%)',
-                filter: 'blur(14px)',
+                filter: 'blur(12px)',
                 top: '50%',
                 left: '50%',
                 x: '-50%',
@@ -685,12 +803,12 @@ export default function ForeverUniverse() {
             {/* Photorealistic 3D Solar Sun Sphere */}
             <div
               style={{
-                width: 'clamp(68px, 17vw, 108px)',
-                height: 'clamp(68px, 17vw, 108px)',
+                width: isMobile ? '64px' : 'clamp(70px, 17vw, 108px)',
+                height: isMobile ? '64px' : 'clamp(70px, 17vw, 108px)',
                 borderRadius: '50%',
                 overflow: 'hidden',
                 border: '2px solid #FFE0A0',
-                boxShadow: '0 0 35px rgba(255, 215, 90, 0.95), 0 0 70px rgba(255, 140, 20, 0.6)',
+                boxShadow: '0 0 30px rgba(255, 215, 90, 0.95), 0 0 60px rgba(255, 140, 20, 0.6)',
                 position: 'relative',
               }}
             >
@@ -711,21 +829,21 @@ export default function ForeverUniverse() {
             {/* Gilded Nameplate Pill */}
             <span
               style={{
-                marginTop: 'clamp(0.45rem, 1.5vw, 0.85rem)',
-                fontSize: 'clamp(0.72rem, 2.2vw, 0.9rem)',
+                marginTop: 'clamp(0.4rem, 1.2vw, 0.8rem)',
+                fontSize: 'clamp(0.68rem, 2vw, 0.88rem)',
                 fontWeight: 700,
                 color: '#FFE0A0',
                 fontFamily: 'Cinzel, var(--font-serif)',
                 whiteSpace: 'nowrap',
                 background: 'linear-gradient(135deg, rgba(20, 10, 42, 0.95), rgba(40, 20, 80, 0.9))',
-                padding: 'clamp(3px, 1vw, 5px) clamp(7px, 2vw, 14px)',
-                borderRadius: '14px',
+                padding: 'clamp(2px, 0.8vw, 4px) clamp(6px, 1.8vw, 12px)',
+                borderRadius: '12px',
                 border: '1.2px solid rgba(255, 224, 160, 0.65)',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.7), 0 0 12px rgba(255,224,160,0.25)',
-                letterSpacing: '0.03em',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.7)',
+                letterSpacing: '0.02em',
               }}
             >
-              ⭐ Sachin's Star
+              ⭐ Sachin
             </span>
           </motion.div>
 
@@ -736,8 +854,8 @@ export default function ForeverUniverse() {
             whileTap={{ scale: 0.94 }}
             style={{
               position: 'absolute',
-              left: '78%',
-              top: '50%',
+              left: `${starPositions.samithra.x}%`,
+              top: `${starPositions.samithra.y}%`,
               x: '-50%',
               y: '-50%',
               cursor: 'pointer',
@@ -753,10 +871,10 @@ export default function ForeverUniverse() {
               transition={{ duration: 24, repeat: Infinity, ease: 'linear' }}
               style={{
                 position: 'absolute',
-                width: 'clamp(98px, 25vw, 155px)',
-                height: 'clamp(98px, 25vw, 155px)',
+                width: isMobile ? '94px' : 'clamp(100px, 25vw, 155px)',
+                height: isMobile ? '94px' : 'clamp(100px, 25vw, 155px)',
                 borderRadius: '50%',
-                border: '1.5px dashed rgba(255, 131, 184, 0.75)',
+                border: '1.4px dashed rgba(255, 131, 184, 0.75)',
                 top: '50%',
                 left: '50%',
                 x: '-50%',
@@ -774,11 +892,11 @@ export default function ForeverUniverse() {
               transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
               style={{
                 position: 'absolute',
-                width: 'clamp(82px, 21vw, 132px)',
-                height: 'clamp(82px, 21vw, 132px)',
+                width: isMobile ? '78px' : 'clamp(84px, 21vw, 132px)',
+                height: isMobile ? '78px' : 'clamp(84px, 21vw, 132px)',
                 borderRadius: '50%',
                 background: 'radial-gradient(circle, rgba(255, 131, 184, 0.65) 20%, rgba(216, 27, 96, 0.35) 55%, transparent 75%)',
-                filter: 'blur(14px)',
+                filter: 'blur(12px)',
                 top: '50%',
                 left: '50%',
                 x: '-50%',
@@ -790,12 +908,12 @@ export default function ForeverUniverse() {
             {/* Photorealistic 3D Rose Queen Star Sphere */}
             <div
               style={{
-                width: 'clamp(68px, 17vw, 108px)',
-                height: 'clamp(68px, 17vw, 108px)',
+                width: isMobile ? '64px' : 'clamp(70px, 17vw, 108px)',
+                height: isMobile ? '64px' : 'clamp(70px, 17vw, 108px)',
                 borderRadius: '50%',
                 overflow: 'hidden',
                 border: '2px solid #FF83B8',
-                boxShadow: '0 0 35px rgba(255, 131, 184, 0.98), 0 0 70px rgba(216, 27, 96, 0.6)',
+                boxShadow: '0 0 30px rgba(255, 131, 184, 0.98), 0 0 60px rgba(216, 27, 96, 0.6)',
                 position: 'relative',
               }}
             >
@@ -816,28 +934,30 @@ export default function ForeverUniverse() {
             {/* Gilded Nameplate Pill */}
             <span
               style={{
-                marginTop: 'clamp(0.45rem, 1.5vw, 0.85rem)',
-                fontSize: 'clamp(0.72rem, 2.2vw, 0.9rem)',
+                marginTop: 'clamp(0.4rem, 1.2vw, 0.8rem)',
+                fontSize: 'clamp(0.68rem, 2vw, 0.88rem)',
                 fontWeight: 700,
                 color: '#FF83B8',
                 fontFamily: 'Cinzel, var(--font-serif)',
                 whiteSpace: 'nowrap',
                 background: 'linear-gradient(135deg, rgba(30, 8, 25, 0.95), rgba(70, 15, 55, 0.9))',
-                padding: 'clamp(3px, 1vw, 5px) clamp(7px, 2vw, 14px)',
-                borderRadius: '14px',
+                padding: 'clamp(2px, 0.8vw, 4px) clamp(6px, 1.8vw, 12px)',
+                borderRadius: '12px',
                 border: '1.2px solid rgba(255, 131, 184, 0.65)',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.7), 0 0 12px rgba(255,131,184,0.25)',
-                letterSpacing: '0.03em',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.7)',
+                letterSpacing: '0.02em',
               }}
             >
-              💖 Samithra's Star
+              💖 Samithra
             </span>
           </motion.div>
 
-          {/* ─── 5 CELESTIAL STELLAR AMULETS (INTERACTIVE NODES) ─── */}
+          {/* ─── 5 CELESTIAL STELLAR AMULETS (DYNAMIC RESPONSIVE POSITIONING) ─── */}
           {cosmicNodes.map((node) => {
             const isLit = illuminatedNodes.has(node.id);
             const isSelected = activeNode?.id === node.id;
+            const coords = getNodeCoords(node.id);
+
             return (
               <motion.button
                 key={node.id}
@@ -846,12 +966,12 @@ export default function ForeverUniverse() {
                 whileTap={{ scale: 0.9 }}
                 style={{
                   position: 'absolute',
-                  left: `${node.x}%`,
-                  top: `${node.y}%`,
+                  left: `${coords.x}%`,
+                  top: `${coords.y}%`,
                   x: '-50%',
                   y: '-50%',
-                  width: 'clamp(36px, 9vw, 46px)',
-                  height: 'clamp(36px, 9vw, 46px)',
+                  width: isMobile ? '38px' : 'clamp(38px, 9vw, 46px)',
+                  height: isMobile ? '38px' : 'clamp(38px, 9vw, 46px)',
                   borderRadius: '50%',
                   background: isLit
                     ? `radial-gradient(circle at 35% 35%, #FFFFFF 0%, ${node.color} 50%, #150928 100%)`
@@ -865,7 +985,7 @@ export default function ForeverUniverse() {
                     ? `0 0 25px ${node.color}, 0 0 40px ${node.color}, inset 0 0 8px #FFF`
                     : '0 4px 12px rgba(0,0,0,0.6)',
                   zIndex: 15,
-                  fontSize: 'clamp(0.92rem, 2.5vw, 1.15rem)',
+                  fontSize: isMobile ? '1rem' : 'clamp(0.92rem, 2.5vw, 1.15rem)',
                   transition: 'all 0.3s ease',
                   padding: 0,
                   outline: isSelected ? '3px solid #FFE0A0' : 'none',
