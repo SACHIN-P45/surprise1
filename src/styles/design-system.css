@@ -185,6 +185,12 @@ a {
   padding: var(--space-xl) var(--space-md);
   overflow: hidden !important;
   contain: paint;
+  content-visibility: auto;
+  contain-intrinsic-size: 850px;
+}
+
+#chapter-gate {
+  content-visibility: visible !important;
 }
 
 .chapter-content {
@@ -206,8 +212,8 @@ a {
 /* ─── GLASSMORPHISM CARD ─────────────────────────────────────── */
 .glass-card {
   background: var(--glass-bg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--glass-shadow);
@@ -221,8 +227,8 @@ a {
     rgba(109, 76, 194, 0.15) 50%,
     rgba(23, 16, 46, 0.7) 100%
   );
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(205, 187, 255, 0.2);
   border-radius: var(--radius-lg);
   box-shadow:

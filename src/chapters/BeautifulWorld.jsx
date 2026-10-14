@@ -148,19 +148,10 @@ export default function BeautifulWorld() {
         transition: 'background 0.8s ease',
       }}
     >
-      <FloatingPetals count={magicMode ? 14 : 4} />
+      <FloatingPetals count={magicMode ? 7 : 3} />
 
       {/* ─── AMBIENT COSMIC NEBULA RADIANCE ─── */}
-      <motion.div
-        animate={
-          magicMode
-            ? {
-                scale: [1, 1.18, 1],
-                opacity: [0.38, 0.55, 0.38],
-              }
-            : { scale: 0.85, opacity: 0.1 }
-        }
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+      <div
         style={{
           position: 'absolute',
           top: '12%',
@@ -169,11 +160,12 @@ export default function BeautifulWorld() {
           width: 'clamp(320px, 65vw, 850px)',
           height: 'clamp(320px, 65vw, 850px)',
           borderRadius: '50%',
-          background:
-            'radial-gradient(circle, rgba(255,131,184,0.3) 0%, rgba(109,76,194,0.22) 45%, transparent 70%)',
-          filter: 'blur(75px)',
+          background: magicMode
+            ? 'radial-gradient(circle, rgba(255,131,184,0.22) 0%, rgba(109,76,194,0.16) 45%, transparent 70%)'
+            : 'radial-gradient(circle, rgba(109,76,194,0.12) 0%, transparent 60%)',
           pointerEvents: 'none',
           zIndex: 1,
+          transition: 'background 0.8s ease',
         }}
         aria-hidden="true"
       />
@@ -403,9 +395,10 @@ export default function BeautifulWorld() {
             ? 'linear-gradient(145deg, rgba(30, 16, 56, 0.94) 0%, rgba(48, 18, 72, 0.9) 50%, rgba(22, 12, 44, 0.96) 100%)'
             : 'linear-gradient(145deg, rgba(20, 14, 34, 0.9) 0%, rgba(14, 8, 24, 0.92) 100%)',
           boxShadow: magicMode
-            ? '0 25px 85px rgba(0,0,0,0.75), 0 0 90px rgba(255,131,184,0.25), inset 0 1px 1px rgba(255,255,255,0.2)'
+            ? '0 20px 60px rgba(0,0,0,0.7), 0 0 50px rgba(255,131,184,0.18)'
             : '0 20px 50px rgba(0,0,0,0.6)',
-          backdropFilter: 'blur(28px)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
           transition: 'all 0.6s ease',
           zIndex: 10,
           marginBottom: '3rem',
@@ -429,8 +422,7 @@ export default function BeautifulWorld() {
               transform: 'translateX(-50%)',
               width: '360px',
               height: '220px',
-              background: 'radial-gradient(circle, rgba(255, 131, 184, 0.25) 0%, rgba(255, 224, 160, 0.15) 50%, transparent 70%)',
-              filter: 'blur(35px)',
+              background: 'radial-gradient(circle, rgba(255, 131, 184, 0.2) 0%, rgba(255, 224, 160, 0.1) 50%, transparent 70%)',
               pointerEvents: 'none',
               zIndex: 0,
             }}

@@ -1,7 +1,6 @@
 import { useState, useRef, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { KeyRound, Sparkles, Heart, Lock, Unlock, Flame, Crown, Star, Delete, X, Check } from 'lucide-react';
-import StarField from '../components/StarField';
 import FloatingPetals from '../components/FloatingPetals';
 
 /**
@@ -244,7 +243,6 @@ export default function SecretGate({ onEnter }) {
           right: '15%',
           height: '55%',
           background: 'radial-gradient(ellipse at 50% 10%, rgba(124, 82, 216, 0.28) 0%, rgba(255, 131, 184, 0.16) 45%, transparent 75%)',
-          filter: 'blur(70px)',
           pointerEvents: 'none',
           zIndex: 1,
         }}
@@ -259,14 +257,10 @@ export default function SecretGate({ onEnter }) {
           width: 'clamp(350px, 60vw, 750px)',
           height: 'clamp(350px, 50vh, 600px)',
           background: 'radial-gradient(circle, rgba(255, 224, 160, 0.12) 0%, rgba(109, 76, 194, 0.15) 50%, transparent 75%)',
-          filter: 'blur(60px)',
           pointerEvents: 'none',
           zIndex: 1,
         }}
       />
-
-      {/* ─── LAYER C: STARFIELD & SHOOTING STARS ─── */}
-      <StarField density={120} />
 
       <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1 }} aria-hidden="true">
         {shootingStars.map((star) => (
@@ -305,13 +299,10 @@ export default function SecretGate({ onEnter }) {
       </div>
 
       {/* ─── LAYER D: FLOATING PETALS ─── */}
-      <FloatingPetals count={14} />
+      <FloatingPetals count={6} />
 
       {/* ─── SECTION 3: THE ETHEREAL CINEMATIC MOON ─── */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: 'easeOut' }}
+      <div
         style={{
           position: 'absolute',
           top: 'clamp(2.5%, 4vh, 6%)',
@@ -337,7 +328,6 @@ export default function SecretGate({ onEnter }) {
             height: '18%',
             borderRadius: '50%',
             background: 'radial-gradient(circle, rgba(160, 125, 60, 0.25) 0%, rgba(160, 125, 60, 0.05) 80%)',
-            filter: 'blur(1.5px)',
           }}
         />
         <div
@@ -349,7 +339,6 @@ export default function SecretGate({ onEnter }) {
             height: '24%',
             borderRadius: '50%',
             background: 'radial-gradient(circle, rgba(160, 125, 60, 0.22) 0%, rgba(160, 125, 60, 0.05) 80%)',
-            filter: 'blur(2px)',
           }}
         />
         <div
@@ -361,24 +350,9 @@ export default function SecretGate({ onEnter }) {
             height: '14%',
             borderRadius: '50%',
             background: 'radial-gradient(circle, rgba(160, 125, 60, 0.24) 0%, rgba(160, 125, 60, 0.05) 80%)',
-            filter: 'blur(1.5px)',
           }}
         />
-
-        {/* Gentle celestial floating oscillation */}
-        <motion.div
-          animate={
-            prefersReducedMotion
-              ? {}
-              : {
-                  y: [-3, 4, -3],
-                  opacity: [0.92, 1, 0.92],
-                }
-          }
-          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ position: 'absolute', inset: 0, borderRadius: '50%', pointerEvents: 'none' }}
-        />
-      </motion.div>
+      </div>
 
       {/* Fairytale Castle Horizon Silhouette */}
       <div
@@ -551,9 +525,11 @@ export default function SecretGate({ onEnter }) {
         </AnimatePresence>
 
         {/* ─── REALISTIC OPEN GATE STATE (Revealed when unlocked) ─── */}
-        <motion.img
+        <img
           src="/images/gate-realistic-open.jpg"
           alt="Magical Castle Wonderland - Gates Open"
+          loading="eager"
+          decoding="async"
           style={{
             position: 'absolute',
             inset: 0,
@@ -568,22 +544,25 @@ export default function SecretGate({ onEnter }) {
         <motion.div
           animate={
             gateState === 'opening'
-              ? { opacity: 0, scale: 1.08, filter: 'blur(10px)' }
+              ? { opacity: 0, scale: 1.06 }
               : knockCount > 0
               ? { scale: [1, 1.015, 0.99, 1] }
-              : { opacity: 1, scale: 1, filter: 'blur(0px)' }
+              : { opacity: 1, scale: 1 }
           }
-          transition={{ duration: gateState === 'opening' ? 1.6 : 0.35, ease: 'easeInOut' }}
+          transition={{ duration: gateState === 'opening' ? 1.4 : 0.35, ease: 'easeInOut' }}
           style={{
             position: 'absolute',
             inset: 0,
             zIndex: 3,
             pointerEvents: 'none',
+            willChange: 'transform, opacity',
           }}
         >
           <img
             src="/images/gate-realistic-closed.jpg"
             alt="Royal Palace Gate - Closed"
+            loading="eager"
+            decoding="async"
             style={{
               width: '100%',
               height: '100%',
@@ -598,7 +577,7 @@ export default function SecretGate({ onEnter }) {
             key={ripple.id}
             initial={{ scale: 0, opacity: 1 }}
             animate={{ scale: 3.5, opacity: 0 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
             style={{
               position: 'absolute',
               left: ripple.x - 25,
@@ -606,8 +585,8 @@ export default function SecretGate({ onEnter }) {
               width: 50,
               height: 50,
               borderRadius: '50%',
-              border: '2.5px solid #FFE0A0',
-              background: 'radial-gradient(circle, rgba(255, 224, 160, 0.65) 0%, transparent 70%)',
+              border: '2px solid #FFE0A0',
+              background: 'radial-gradient(circle, rgba(255, 224, 160, 0.5) 0%, transparent 70%)',
               pointerEvents: 'none',
               zIndex: 20,
             }}
@@ -622,19 +601,14 @@ export default function SecretGate({ onEnter }) {
               e.stopPropagation();
               handleOpenPasscode();
             }}
-            whileHover={{ scale: 1.18 }}
-            whileTap={{ scale: 0.92 }}
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.94 }}
             title="Tap to enter Golden Key passcode (1530)"
             animate={
               gateState === 'unlocking'
-                ? { scale: [1, 1.25, 1.15], boxShadow: '0 0 50px rgba(255, 224, 160, 1)' }
+                ? { scale: [1, 1.25, 1.15] }
                 : {
                     scale: [1, 1.08, 1],
-                    boxShadow: [
-                      '0 0 20px rgba(255, 224, 160, 0.7)',
-                      '0 0 35px rgba(255, 131, 184, 0.85)',
-                      '0 0 20px rgba(255, 224, 160, 0.7)',
-                    ],
                   }
             }
             transition={{
@@ -652,10 +626,12 @@ export default function SecretGate({ onEnter }) {
               borderRadius: '50%',
               background: 'radial-gradient(circle at 35% 35%, #FFF8F3 0%, #FFE0A0 40%, #E69500 80%, #7A4200 100%)',
               border: '2.5px solid #FFF8F3',
+              boxShadow: '0 0 30px rgba(255, 224, 160, 0.85)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               zIndex: 10,
+              willChange: 'transform',
               cursor: gateState === 'idle' ? 'pointer' : 'default',
             }}
           >

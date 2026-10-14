@@ -37,13 +37,18 @@
 
 /* ─── TWINKLE ────────────────────────────────────────────────── */
 @keyframes twinkle {
-  0%, 100% { opacity: 0.3; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.2); }
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 0.95; }
 }
 
 @keyframes twinkleFast {
-  0%, 100% { opacity: 0.2; }
+  0%, 100% { opacity: 0.15; }
   50% { opacity: 1; }
+}
+
+@keyframes twinkleSlow {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.85; }
 }
 
 /* ─── PARTICLE EFFECTS ───────────────────────────────────────── */

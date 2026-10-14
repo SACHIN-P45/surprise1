@@ -3,16 +3,16 @@ import { useMemo } from 'react';
 /**
  * FloatingPetals — Animated falling rose petals
  */
-export default function FloatingPetals({ count = 12 }) {
+export default function FloatingPetals({ count = 8 }) {
   const petals = useMemo(() => {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
-      left: Math.random() * 90 + 5,
-      size: Math.random() * 12 + 8,
-      duration: Math.random() * 10 + 10,
-      delay: Math.random() * 15,
-      opacity: Math.random() * 0.4 + 0.2,
-      rotate: Math.random() * 360,
+      left: Math.round(Math.random() * 88 + 6),
+      size: Math.round(Math.random() * 10 + 8),
+      duration: Math.round(Math.random() * 8 + 9),
+      delay: Math.round(Math.random() * 10),
+      opacity: Number((Math.random() * 0.35 + 0.25).toFixed(2)),
+      rotate: Math.round(Math.random() * 360),
     }));
   }, [count]);
 
@@ -41,6 +41,7 @@ export default function FloatingPetals({ count = 12 }) {
             width: `${petal.size}px`,
             height: `${petal.size}px`,
             opacity: petal.opacity,
+            willChange: 'transform',
             animation: `fallingPetal ${petal.duration}s linear ${petal.delay}s infinite`,
           }}
         >
