@@ -1,0 +1,172 @@
+/* ═══════════════════════════════════════════════════════════════
+   SAMITHRA'S LOVE UNIVERSE — Global Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
+
+@import './design-system.css';
+@import './animations.css';
+@import './responsive.css';
+
+/* ─── APP CONTAINER ──────────────────────────────────────────── */
+#root {
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.app-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* ─── CHAPTER BACKGROUNDS ────────────────────────────────────── */
+.bg-midnight-galaxy {
+  background: linear-gradient(180deg, 
+    var(--midnight) 0%, 
+    var(--galaxy-purple) 40%, 
+    #1a0a2e 70%, 
+    var(--midnight) 100%
+  );
+}
+
+.bg-romantic-sky {
+  background: linear-gradient(180deg, 
+    #0a0a28 0%, 
+    #1a1040 30%, 
+    #2d1060 60%, 
+    #1a0a2e 100%
+  );
+}
+
+.bg-birthday-stage {
+  background: linear-gradient(180deg, 
+    #0a0a20 0%, 
+    #17102E 30%, 
+    #251545 60%, 
+    #0f0825 100%
+  );
+}
+
+.bg-garden {
+  background: linear-gradient(180deg, 
+    #060818 0%, 
+    #0a1428 30%, 
+    #101030 60%, 
+    #060818 100%
+  );
+}
+
+.bg-vault {
+  background: linear-gradient(180deg, 
+    #0f0520 0%, 
+    #1a0835 30%, 
+    #250f45 60%, 
+    #0f0520 100%
+  );
+}
+
+/* ─── DECORATIVE ELEMENTS ────────────────────────────────────── */
+.decorative-line {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rose-pink), transparent);
+  margin: var(--space-md) auto;
+}
+
+.decorative-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rose-pink);
+  margin: var(--space-sm) auto;
+  box-shadow: 0 0 10px rgba(255, 131, 184, 0.5);
+}
+
+.quote-icon {
+  font-size: 3rem;
+  color: rgba(109, 76, 194, 0.3);
+  font-family: var(--font-serif);
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+
+/* ─── IMAGE PLACEHOLDER ──────────────────────────────────────── */
+.image-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: linear-gradient(135deg, 
+    rgba(109, 76, 194, 0.2) 0%, 
+    rgba(255, 131, 184, 0.15) 50%, 
+    rgba(109, 76, 194, 0.2) 100%
+  );
+  border: 2px dashed rgba(205, 187, 255, 0.25);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(205, 187, 255, 0.5);
+  font-size: 0.9rem;
+  gap: 0.5rem;
+}
+
+.image-placeholder .placeholder-icon {
+  font-size: 2.5rem;
+  opacity: 0.4;
+}
+
+/* ─── OVERLAY ────────────────────────────────────────────────── */
+.overlay-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 11, 32, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+}
+
+/* ─── CHAPTER TRANSITION ─────────────────────────────────────── */
+.chapter-divider {
+  width: 100%;
+  height: 120px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chapter-divider::before {
+  content: '';
+  position: absolute;
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--soft-lavender), transparent);
+  opacity: 0.3;
+}
+
+/* ─── NAVIGATION CHAPTER TITLE ───────────────────────────────── */
+.chapter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  background: rgba(109, 76, 194, 0.15);
+  border: 1px solid rgba(205, 187, 255, 0.2);
+  border-radius: var(--radius-xl);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--soft-lavender);
+  margin-bottom: var(--space-md);
+}

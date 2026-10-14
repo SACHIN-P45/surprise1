@@ -1,0 +1,209 @@
+/* ═══════════════════════════════════════════════════════════════
+   SAMITHRA'S LOVE UNIVERSE — Animations
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── FLOATING ANIMATIONS ────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+}
+
+@keyframes floatGentle {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-8px) translateX(4px); }
+  75% { transform: translateY(4px) translateX(-4px); }
+}
+
+/* ─── GLOW ANIMATIONS ────────────────────────────────────────── */
+@keyframes glow {
+  0%, 100% { opacity: 0.6; filter: blur(0px); }
+  50% { opacity: 1; filter: blur(2px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(109, 76, 194, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(109, 76, 194, 0.5), 0 0 60px rgba(255, 131, 184, 0.2); }
+}
+
+@keyframes softPulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* ─── TWINKLE ────────────────────────────────────────────────── */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes twinkleFast {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* ─── PARTICLE EFFECTS ───────────────────────────────────────── */
+@keyframes riseAndFade {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-120%) scale(0.3);
+  }
+}
+
+@keyframes driftLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(100%) translateY(0) rotate(0deg);
+  }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.6; }
+  100% {
+    opacity: 0;
+    transform: translateX(-20%) translateY(60px) rotate(360deg);
+  }
+}
+
+@keyframes fallingPetal {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) translateX(0) rotate(0deg);
+  }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.5; }
+  100% {
+    opacity: 0;
+    transform: translateY(calc(100% + 40px)) translateX(25px) rotate(360deg);
+  }
+}
+
+@keyframes confettiFall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(calc(100% + 60px)) rotate(720deg) scale(0.5);
+  }
+}
+
+/* ─── ENTRANCE ANIMATIONS ───────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ─── CANDLE FLAME ───────────────────────────────────────────── */
+@keyframes flicker {
+  0%, 100% { 
+    transform: scaleY(1) scaleX(1) translateY(0);
+    opacity: 1;
+  }
+  25% { 
+    transform: scaleY(1.1) scaleX(0.9) translateY(-1px);
+    opacity: 0.9;
+  }
+  50% { 
+    transform: scaleY(0.95) scaleX(1.05) translateY(1px);
+    opacity: 1;
+  }
+  75% { 
+    transform: scaleY(1.05) scaleX(0.95) translateY(-2px);
+    opacity: 0.85;
+  }
+}
+
+/* ─── FIREWORKS ──────────────────────────────────────────────── */
+@keyframes fireworkBurst {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ─── SPARKLE ────────────────────────────────────────────────── */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+/* ─── ROTATE ─────────────────────────────────────────────────── */
+@keyframes slowRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ─── WAVE ───────────────────────────────────────────────────── */
+@keyframes wave {
+  0%, 100% { transform: translateY(0); }
+  25% { transform: translateY(-5px); }
+  75% { transform: translateY(5px); }
+}
+
+/* ─── UTILITY CLASSES ────────────────────────────────────────── */
+.animate-float { animation: float 6s var(--ease-smooth) infinite; }
+.animate-float-slow { animation: floatSlow 8s var(--ease-smooth) infinite; }
+.animate-float-gentle { animation: floatGentle 10s var(--ease-smooth) infinite; }
+.animate-glow { animation: glow 3s var(--ease-smooth) infinite; }
+.animate-pulse-glow { animation: pulseGlow 4s var(--ease-smooth) infinite; }
+.animate-twinkle { animation: twinkle 3s var(--ease-smooth) infinite; }
