@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, 
@@ -10,7 +10,6 @@ import {
   PartyPopper, 
   Star, 
   Camera, 
-  Upload, 
   Check, 
   Volume2, 
   VolumeX, 
@@ -41,12 +40,10 @@ export default function GrandFinale({ onReplay }) {
   const [loveCount, setLoveCount] = useState(0);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(4); // Default to Royal Destiny (dream-05)
-  const [customPhoto, setCustomPhoto] = useState(null);
   const [showCertificateModal, setShowCertificateModal] = useState(false);
   const [floatingTaps, setFloatingTaps] = useState([]);
   const [fireworks, setFireworks] = useState([]);
   const [skyLanterns, setSkyLanterns] = useState([]);
-  const fileInputRef = useRef(null);
 
   // Sachin & Samithra's 5 Cherished Couple Portraits
   const coupleMemories = [
@@ -89,7 +86,7 @@ export default function GrandFinale({ onReplay }) {
     {
       id: 5,
       title: 'Royal Destiny in Purple & Gold',
-      location: 'The Starlight Terrace • Forever Promise',
+      location: '',
       quote: 'Dressed in royal purple and deep black, looking into your eyes and seeing my entire future right there.',
       src: '/images/memories/dream-05.jpg',
       badge: 'Royal Destiny 👑',
@@ -228,17 +225,6 @@ export default function GrandFinale({ onReplay }) {
     setTimeout(() => {
       setFloatingTaps((prev) => prev.filter((t) => t.id !== newTap.id));
     }, 1600);
-  };
-
-  const handlePhotoUpload = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        setCustomPhoto(event.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
   };
 
   // Love milestone levels based on tap count
@@ -852,7 +838,7 @@ export default function GrandFinale({ onReplay }) {
                   }}
                 >
                   <img
-                    src={customPhoto || currentPortrait.src}
+                    src={currentPortrait.src}
                     alt={currentPortrait.title}
                     style={{
                       width: '100%',
@@ -881,29 +867,28 @@ export default function GrandFinale({ onReplay }) {
                       left: '1rem',
                       right: '1rem',
                       textAlign: 'left',
-                      display: 'flex',
-                      alignItems: 'flex-end',
-                      justifyContent: 'space-between',
                       pointerEvents: 'none',
                     }}
                   >
                     <div>
-                      <span
-                        style={{
-                          fontSize: '0.72rem',
-                          color: currentPortrait.accent,
-                          background: 'rgba(0,0,0,0.65)',
-                          padding: '0.2rem 0.55rem',
-                          borderRadius: '999px',
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '4px',
-                          marginBottom: '0.35rem',
-                          border: '1px solid rgba(255,224,160,0.3)',
-                        }}
-                      >
-                        <MapPin size={11} /> {currentPortrait.location}
-                      </span>
+                      {currentPortrait.location && (
+                        <span
+                          style={{
+                            fontSize: '0.72rem',
+                            color: currentPortrait.accent,
+                            background: 'rgba(0,0,0,0.65)',
+                            padding: '0.2rem 0.55rem',
+                            borderRadius: '999px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            marginBottom: '0.35rem',
+                            border: '1px solid rgba(255,224,160,0.3)',
+                          }}
+                        >
+                          <MapPin size={11} /> {currentPortrait.location}
+                        </span>
+                      )}
                       <h4
                         style={{
                           fontFamily: 'var(--font-serif)',
@@ -916,35 +901,6 @@ export default function GrandFinale({ onReplay }) {
                         {currentPortrait.title}
                       </h4>
                     </div>
-
-                    <button
-                      onClick={() => fileInputRef.current?.click()}
-                      style={{
-                        pointerEvents: 'auto',
-                        background: 'rgba(20, 8, 35, 0.85)',
-                        border: '1px solid rgba(255, 224, 160, 0.45)',
-                        borderRadius: '999px',
-                        padding: '6px 14px',
-                        color: 'var(--champagne-gold)',
-                        fontSize: '0.75rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        cursor: 'pointer',
-                        backdropFilter: 'blur(8px)',
-                      }}
-                      title="Upload your favorite memory photo"
-                    >
-                      <Upload size={12} />
-                      <span>{customPhoto ? 'Change Custom' : 'Upload Local 📸'}</span>
-                    </button>
-                    <input
-                      type="file"
-                      ref={fileInputRef}
-                      onChange={handlePhotoUpload}
-                      accept="image/*"
-                      style={{ display: 'none' }}
-                    />
                   </div>
                 </div>
 
@@ -972,14 +928,11 @@ export default function GrandFinale({ onReplay }) {
                   }}
                 >
                   {coupleMemories.map((m, idx) => {
-                    const isSelected = selectedPhotoIndex === idx && !customPhoto;
+                    const isSelected = selectedPhotoIndex === idx;
                     return (
                       <button
                         key={m.id}
-                        onClick={() => {
-                          setCustomPhoto(null);
-                          setSelectedPhotoIndex(idx);
-                        }}
+                        onClick={() => setSelectedPhotoIndex(idx)}
                         style={{
                           background: isSelected
                             ? 'linear-gradient(135deg, #FFE0A0 0%, #FF83B8 100%)'
