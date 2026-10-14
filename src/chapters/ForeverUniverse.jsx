@@ -323,7 +323,7 @@ export default function ForeverUniverse() {
           }}
         >
           <Orbit size={16} color="#FFE0A0" />
-          <span>Chapter 10 • Our Forever Universe</span>
+          <span>Our Forever Universe</span>
         </span>
       </motion.div>
 
@@ -1193,7 +1193,7 @@ export default function ForeverUniverse() {
           onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.9')}
         >
           <span style={{ color: 'var(--champagne-gold)', fontWeight: 600, letterSpacing: '0.03em' }}>
-            Continue to Chapter 11 — A Sacred Letter from Sachin 📜✨
+            Continue to: A Sacred Letter from Sachin 📜✨
           </span>
           <motion.div
             animate={{ y: [0, 6, 0] }}

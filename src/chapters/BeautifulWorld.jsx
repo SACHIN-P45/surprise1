@@ -228,7 +228,7 @@ export default function BeautifulWorld() {
           }}
         >
           <Heart size={13} color="#FF83B8" fill="#FF83B8" style={{ marginRight: 6 }} />
-          Chapter 02 • A Beautiful World
+          A Beautiful World
         </span>
       </motion.div>
 

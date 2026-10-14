@@ -268,7 +268,7 @@ export default function MemoryJourney() {
           }}
         >
           <Sparkles size={15} color="#FFE0A0" />
-          <span>Chapter 05 — Little Moments, Big Feelings</span>
+          <span>Little Moments, Big Feelings</span>
         </span>
       </motion.div>
 
@@ -942,7 +942,7 @@ export default function MemoryJourney() {
           onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.85')}
         >
           <span style={{ color: 'var(--champagne-gold)', fontWeight: 500 }}>
-            Continue to Chapter 06 — Seven Names, One Favourite Person 🌸
+            Continue to: Seven Names, One Favourite Person 🌸
           </span>
           <motion.div
             animate={{ y: [0, 6, 0] }}

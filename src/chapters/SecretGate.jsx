@@ -459,7 +459,7 @@ export default function SecretGate({ onEnter }) {
             }}
           >
             <Sparkles size={14} color="#FFE0A0" />
-            Chapter 01 — The Secret Gate of Love
+            The Secret Gate of Love
           </span>
         </motion.div>
 

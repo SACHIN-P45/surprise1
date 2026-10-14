@@ -218,7 +218,7 @@ export default function FeelingsGarden() {
           }}
         >
           <Flower2 size={16} color="#FFE0A0" />
-          <span>Chapter 07 — The Garden of Feelings</span>
+          <span>The Garden of Feelings</span>
         </span>
       </motion.div>
 
@@ -1232,7 +1232,7 @@ export default function FeelingsGarden() {
           onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.85')}
         >
           <span style={{ color: 'var(--champagne-gold)', fontWeight: 500 }}>
-            Continue to Chapter 08 — The Secret Love Vault 💌
+            Continue to: The Secret Love Vault 💌
           </span>
           <motion.div
             animate={{ y: [0, 6, 0] }}

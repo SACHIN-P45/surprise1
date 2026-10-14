@@ -239,7 +239,7 @@ export default function FantasyWorld() {
           }}
         >
           <Compass size={16} color="#FFE0A0" />
-          <span>Chapter 09 — If I Could Give You the World</span>
+          <span>If I Could Give You the World</span>
         </span>
       </motion.div>
 
@@ -836,7 +836,7 @@ export default function FantasyWorld() {
           onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.85')}
         >
           <span style={{ color: 'var(--champagne-gold)', fontWeight: 500 }}>
-            Continue to Chapter 10 — Our Forever Universe 🪐✨
+            Continue to: Our Forever Universe 🪐✨
           </span>
           <motion.div
             animate={{ y: [0, 6, 0] }}

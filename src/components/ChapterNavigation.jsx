@@ -103,7 +103,7 @@ export default function ChapterNavigation({ currentChapter, onNavigate, visible 
         >
           <Menu size={14} />
           <span className="nav-label">
-            Ch {activeChapters[safeIndex]?.number || safeIndex + 2}/12
+            Our Story
           </span>
         </button>
 
@@ -170,7 +170,7 @@ export default function ChapterNavigation({ currentChapter, onNavigate, visible 
                     color: 'var(--warm-ivory)',
                   }}
                 >
-                  Chapters
+                  Our Journey
                 </h2>
                 <button
                   className="btn-close"

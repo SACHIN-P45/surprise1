@@ -234,7 +234,7 @@ export default function LoveLetter() {
           }}
         >
           <Feather size={14} color="#FFE0A0" />
-          Chapter 11 — A Letter from Sachin
+          A Letter from Sachin
         </span>
       </motion.div>
 
@@ -1689,7 +1689,7 @@ export default function LoveLetter() {
               boxShadow: '0 8px 30px rgba(255, 131, 184, 0.45)',
             }}
           >
-            <span>PROCEED TO CHAPTER 12 — THE GRAND FINALE 🌌🎆</span>
+            <span>PROCEED TO THE GRAND FINALE 🌌🎆</span>
             <ArrowDown size={16} style={{ marginLeft: 6 }} />
           </button>
         </div>

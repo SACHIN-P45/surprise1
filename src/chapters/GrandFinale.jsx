@@ -412,7 +412,7 @@ export default function GrandFinale({ onReplay }) {
           }}
         >
           <Crown size={14} color="#FFE0A0" />
-          Chapter 12 • The Ultimate Birthday Climax
+          The Ultimate Birthday Climax
         </span>
       </motion.div>
 
@@ -1284,60 +1284,7 @@ export default function GrandFinale({ onReplay }) {
                 </div>
               </div>
 
-              {/* ───────────────────────────────────────────────────────────
-                  THE 12-CHAPTER "UNIVERSE OF MEMORIES" COMPLETION TRACK
-                  ─────────────────────────────────────────────────────────── */}
-              <div
-                style={{
-                  background: 'rgba(10, 4, 18, 0.65)',
-                  border: '1.5px solid rgba(255, 224, 160, 0.35)',
-                  borderRadius: '20px',
-                  padding: '1.5rem',
-                  maxWidth: '740px',
-                  margin: '0 auto 2.5rem auto',
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginBottom: '0.75rem' }}>
-                  <Star size={15} fill="#FFE0A0" color="#FFE0A0" />
-                  <span style={{ fontSize: '0.84rem', color: '#FFE0A0', letterSpacing: '1.5px', textTransform: 'uppercase', fontWeight: 700 }}>
-                    12 of 12 Revelations Unlocked • 100% Universe Complete
-                  </span>
-                  <Star size={15} fill="#FFE0A0" color="#FFE0A0" />
-                </div>
 
-                <p style={{ fontSize: '0.85rem', color: 'var(--soft-lavender)', marginBottom: '1.1rem' }}>
-                  You have experienced every secret, memory, wish, and letter created with pure love by Sachin.
-                </p>
-
-                <div
-                  style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    justifyContent: 'center',
-                    gap: '7px',
-                  }}
-                >
-                  {chapters.map((ch) => (
-                    <span
-                      key={ch.id}
-                      style={{
-                        background: 'rgba(255, 224, 160, 0.08)',
-                        border: '1px solid rgba(255, 224, 160, 0.35)',
-                        borderRadius: '999px',
-                        padding: '4px 12px',
-                        fontSize: '0.74rem',
-                        color: 'var(--warm-ivory)',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '5px',
-                      }}
-                    >
-                      <Check size={11} color="#85E3B3" />
-                      <span>{ch.number}. {ch.title}</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
 
               {/* ───────────────────────────────────────────────────────────
                   GRAND ACTION CONTROLS (FIREWORKS & REPLAY)

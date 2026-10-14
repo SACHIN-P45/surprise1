@@ -194,7 +194,7 @@ export default function NicknameWorld() {
           }}
         >
           <Sparkles size={15} color="#FFE0A0" />
-          <span>Chapter 06 — Seven Names, One Favourite Person</span>
+          <span>Seven Names, One Favourite Person</span>
         </span>
       </motion.div>
 
@@ -1050,7 +1050,7 @@ export default function NicknameWorld() {
           onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.85')}
         >
           <span style={{ color: 'var(--champagne-gold)', fontWeight: 500 }}>
-            Continue to Chapter 07 — The Garden of Feelings 🌸
+            Continue to: The Garden of Feelings 🌸
           </span>
           <motion.div
             animate={{ y: [0, 6, 0] }}

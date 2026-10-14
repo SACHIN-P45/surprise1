@@ -232,7 +232,7 @@ export default function BirthdayCelebration() {
           }}
         >
           <PartyPopper size={13} style={{ marginRight: 6 }} />
-          Chapter 03 — Birthday Celebration
+          Birthday Celebration
         </span>
       </motion.div>
 

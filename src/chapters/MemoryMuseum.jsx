@@ -92,7 +92,7 @@ export default function MemoryMuseum() {
           }}
         >
           <Sparkles size={14} style={{ marginRight: 7, color: '#FFE0A0' }} />
-          Chapter 04 • Our Cherished Love Portraits
+          Our Cherished Love Portraits
         </span>
       </motion.div>
 

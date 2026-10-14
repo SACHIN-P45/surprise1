@@ -240,7 +240,7 @@ export default function SecretLoveVault() {
           }}
         >
           <KeyRound size={16} color="#FFE0A0" />
-          <span>Chapter 08 — The Secret Love Vault</span>
+          <span>The Secret Love Vault</span>
         </span>
       </motion.div>
 
@@ -925,7 +925,7 @@ export default function SecretLoveVault() {
           onMouseLeave={(e) => (e.currentTarget.style.opacity = '0.85')}
         >
           <span style={{ color: 'var(--champagne-gold)', fontWeight: 500 }}>
-            Continue to Chapter 09 — If I Could Give You the World 🏰✨
+            Continue to: If I Could Give You the World 🏰✨
           </span>
           <motion.div
             animate={{ y: [0, 6, 0] }}
